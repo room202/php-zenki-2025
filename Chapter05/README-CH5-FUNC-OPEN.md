@@ -4,7 +4,7 @@
 
 ### 🔹 解説
 
-日本語などのマルチバイト文字にはの文字数を取得する
+日本語などのマルチバイト文字の文字数を取得する
 
 ### 🔹 サンプルコード
 
@@ -143,6 +143,7 @@ echo number_format($price);
 ## count 関数
 
 ### 🔹 解説
+
 配列に何個要素があるかを調べるための関数
 
 ### 🔹 サンプルコード
@@ -159,3 +160,144 @@ echo count($colors);
 ### 🔹 出力結果
 
 ![](images/07.png)
+
+
+
+## ファイル書き込み (fopen/fwrite/fclose) 関数
+
+### 🔹 解説
+
+ファイルに文字列を書き込んで保存する
+
+### 🔹 サンプルコード
+
+ファイル名 : chap5_8.php
+
+```php
+<?php
+// 書き込むHTML文字列
+$text = <<< HTML
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>サンプル</title>
+</head>
+<body>
+  これはfwriteで書き込んだサンプルテキストです。
+</body>
+</html>
+HTML;
+
+// ファイルを「書き込みモード」で開く（存在しない場合は新規作成）
+$fp = fopen("sample.html", "w");
+
+// ファイルが正しく開けたか確認
+if ($fp) {
+    // 文字列を書き込む
+    fwrite($fp, $text);
+
+    // ファイルを閉じる
+    fclose($fp);
+
+    echo "ファイルへの書き込みが完了しました。";
+} else {
+    echo "ファイルを開くことができませんでした。";
+}
+?>
+```
+
+### 🔹 出力結果
+
+![](images/08.png)
+
+
+
+## ファイル読み込み (fopen/fread/filesize/fclose) 関数
+
+### 🔹 解説
+
+ファイルから文字列を読み込む
+
+### 🔹 サンプルコード
+
+ファイル名 : chap5_9.php
+
+```php
+<?php
+$filename = "sample.html";
+
+// ファイルを読み込み専用で開く
+$fp = fopen($filename, "r");
+
+if ($fp) {
+    // ファイルサイズを取得して、全体を読み込む
+    $filesize = filesize($filename);
+    $content = fread($fp, $filesize);
+
+    // ファイルを閉じる
+    fclose($fp);
+
+    // 読み込んだ内容を画面に表示（HTMLをエスケープせずそのまま表示）
+    echo "<h3>sample.html の内容</h3>";
+    echo "<hr>";
+    echo "<pre>";
+    echo htmlspecialchars($content);
+    echo "</pre>";
+} else {
+    echo "ファイルを開くことができませんでした。";
+}
+?>
+```
+
+### 🔹 出力結果
+
+![](images/09.png)
+
+---
+
+# 演習問題
+
+## 内容
+
+あなたは簡易レビュー投稿システムを作ろうとしています。  
+ユーザーは「名前」・「商品名」・「コメント」・「金額」を入力します。  
+それをCSVファイルとして保存します。  
+保存されたデータは画面に一覧表示させます。
+
+以下の要件を満たすようにPHPでアプリを作成しなさい。
+
+## 要件
+
+🔸 入力フォーム（HTML） : review_input.php
+- 名前（テキスト入力）
+- 商品名（カンマ区切りで複数指定可能）
+- コメント（テキストエリア）
+- 金額（数字のみ）
+
+🔸 データの保存（PHP） : review_output.php
+- 入力値の前後の空白は trim関数 を使って取り除くこと。
+- 商品名は explode関数 で配列化し、implode関数 で「・」区切りの文字列に整形して保存すること。
+- ファイルは "reviews.csv" とし、1行に「名前,商品リスト,コメント,金額」を書き込むこと。
+- 書き込みには fopen関数 / fwrite関数 / fclose関数 を使用すること。
+
+🔸 データの表示（PHP） : review_output.php
+- fopen関数 / fread関数 / fclose関数 / filesize関数 を使ってファイルを読み込み、各行を explode関数 で分割して処理すること。
+
+- 各レビューには次の情報を表示すること：
+
+    - 名前（htmlspecialchars関数 で無害化）
+    - 商品リスト（整形済の文字列）
+    - コメント（文字数は mb_strlen関数 でカウントし、htmlspecialchars関数 で無害化）
+    - 金額（number_format関数 を使ってカンマ区切り表示）
+    - レビュー件数は count関数 関数を使って表示すること。
+
+## 🔹 出力結果
+
+![](images/10-1.png)
+
+![](images/10-2.png)
+
+### CSVファイル(reviews.csv)の中身
+
+![](images/10-3.png)
