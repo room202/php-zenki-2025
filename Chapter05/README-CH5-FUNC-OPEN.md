@@ -269,19 +269,19 @@ if ($fp) {
 
 ## 要件
 
-🔸 入力フォーム（HTML） : review_input.php
+🔸 入力フォーム : review_input.php
 - 名前（テキスト入力）
 - 商品名（カンマ区切りで複数指定可能）
-- コメント（テキストエリア）
+- コメント（テキスト入力）
 - 金額（数字のみ）
 
-🔸 データの保存（PHP） : review_output.php
+🔸 データの保存 : review_output.php
 - 入力値の前後の空白は trim関数 を使って取り除くこと。
 - 商品名は explode関数 で配列化し、implode関数 で「・」区切りの文字列に整形して保存すること。
 - ファイルは "reviews.csv" とし、1行に「名前,商品リスト,コメント,金額」を書き込むこと。
 - 書き込みには fopen関数 / fwrite関数 / fclose関数 を使用すること。
 
-🔸 データの表示（PHP） : review_output.php
+🔸 データの表示 : review_output.php
 - fopen関数 / fread関数 / fclose関数 / filesize関数 を使ってファイルを読み込み、各行を explode関数 で分割して処理すること。
 
 - 各レビューには次の情報を表示すること：
