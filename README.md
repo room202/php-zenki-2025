@@ -10,6 +10,6 @@
 
 ## Chapter3 ～ 5 : 総合演習問題
 
-[演習問題 : デバッグ編](README.md)
+[演習問題 : デバッグ編](Debug/README.md)
 
 ~~[演習問題](Chapter03-05/README-CH3-5-EXE-OPEN.md)~~
