@@ -44,10 +44,10 @@
 
 ## 実行例
 
-ファイル名 : **survey-input.php**
+ファイル名 : `survey-input.php`
 
 ![](images/01.png)
 
-ファイル名 : **survey-output.php**
+ファイル名 : `survey-output.php`
 
 ![](images/02.png)
